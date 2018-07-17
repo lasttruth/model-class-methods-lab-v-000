@@ -10,7 +10,7 @@ class Captain < ActiveRecord::Base
   end
 
   def seld.ship
-    
+
   end
 
   def self.last_three_alphabetically
@@ -28,5 +28,5 @@ class Captain < ActiveRecord::Base
   def self.with_three_classifications
 
   end
-  
+
 end
