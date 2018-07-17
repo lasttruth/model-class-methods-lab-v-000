@@ -9,7 +9,7 @@ class Captain < ActiveRecord::Base
 
   end
 
-  def seld.ship
+  def self.ship
 
   end
 
