@@ -1,27 +1,32 @@
 class Captain < ActiveRecord::Base
   has_many :boats
 
-  def seld.first_five
+  def self.first_five
+    all.limit(5)
+  end
+
+  def self.dinghy
+
+  end
+
+  def seld.ship
     
   end
 
-  def dinghy
-    
+  def self.last_three_alphabetically
+
   end
 
-  def last_three_alphabetically 
-    
+  def self.without_a_captain
+
   end
 
-  def without_a_captain
-    
+  def self.sailboats
+
   end
 
-  def sailboats
-    
-  end
+  def self.with_three_classifications
 
-  def with_three_classifications
-    
   end
+  
 end
