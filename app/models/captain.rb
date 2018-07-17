@@ -1,39 +1,23 @@
 class Captain < ActiveRecord::Base
   has_many :boats
 
-  def self.first_five
-   all.limit(5)
- end
-
- def self.dinghy
-   where("length < 20")
- end
-
- def self.ship
-   where("length >= 20")
- end
-
- def self.last_three_alphabetically
-   all.order(name: :desc).limit(3)
- end
-
- def self.without_a_captain
-   where(captain_id: nil)
- end
-
- def self.sailboats
-   includes(:classifications).where(classifications: { name: 'Sailboat' })
- end
-
- def self.with_three_classifications
-   joins(:classifications).group("boats.id").having("COUNT(*) = 3").select("boats.*")
- end
-
- def self.non_sailboats
-   where("id NOT IN (?)", self.sailboats.pluck(:id))
- end
-
- def self.longest
-   order('length DESC').first
- end
+  def self.catamaran_operators
+      includes(boats: :classifications).where(classifications: {name: "Catamaran"})
+    end
+  
+    def self.sailors
+      includes(boats: :classifications).where(classifications: {name: "Sailboat"}).uniq
+    end
+  
+    def self.motorboat_operators
+      includes(boats: :classifications).where(classifications: {name: "Motorboat"})
+    end
+  
+    def self.talented_seafarers
+      where("id IN (?)", self.sailors.pluck(:id) & self.motorboat_operators.pluck(:id))
+    end
+  
+    def self.non_sailors
+      where.not("id IN (?)", self.sailors.pluck(:id))
+    end
 end
